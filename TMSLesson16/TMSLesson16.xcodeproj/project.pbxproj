@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		049728412B5A1CCB007774E1 /* AnimationManager .swift in Sources */ = {isa = PBXBuildFile; fileRef = 049728402B5A1CCB007774E1 /* AnimationManager .swift */; };
+		049728432B5A1DC5007774E1 /* GestureManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 049728422B5A1DC5007774E1 /* GestureManager.swift */; };
 		04A543602B58AFC100F4409B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A5435F2B58AFC100F4409B /* AppDelegate.swift */; };
 		04A543622B58AFC100F4409B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A543612B58AFC100F4409B /* SceneDelegate.swift */; };
 		04A543642B58AFC100F4409B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04A543632B58AFC100F4409B /* ViewController.swift */; };
@@ -16,6 +18,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		049728402B5A1CCB007774E1 /* AnimationManager .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AnimationManager .swift"; sourceTree = "<group>"; };
+		049728422B5A1DC5007774E1 /* GestureManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureManager.swift; sourceTree = "<group>"; };
 		04A5435C2B58AFC100F4409B /* TMSLesson16.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TMSLesson16.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04A5435F2B58AFC100F4409B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		04A543612B58AFC100F4409B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				04A5435F2B58AFC100F4409B /* AppDelegate.swift */,
+				049728402B5A1CCB007774E1 /* AnimationManager .swift */,
+				049728422B5A1DC5007774E1 /* GestureManager.swift */,
 				04A543612B58AFC100F4409B /* SceneDelegate.swift */,
 				04A543632B58AFC100F4409B /* ViewController.swift */,
 				04A543652B58AFC100F4409B /* Main.storyboard */,
@@ -139,8 +145,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				04A543642B58AFC100F4409B /* ViewController.swift in Sources */,
+				049728412B5A1CCB007774E1 /* AnimationManager .swift in Sources */,
 				04A543602B58AFC100F4409B /* AppDelegate.swift in Sources */,
 				04A543622B58AFC100F4409B /* SceneDelegate.swift in Sources */,
+				049728432B5A1DC5007774E1 /* GestureManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

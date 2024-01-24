@@ -9,176 +9,114 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var ButtonUP: UIButton!
+    @IBOutlet weak var buttonUP: UIButton!
     
-    @IBOutlet weak var ButtonLeft: UIButton!
+    @IBOutlet weak var buttonDown: UIButton!
     
-    @IBOutlet weak var ButtonDown: UIButton!
+    @IBOutlet weak var buttonRight: UIButton!
     
-    @IBOutlet weak var ButtonRight: UIButton!
+    @IBOutlet weak var buttonLeft: UIButton!
     
-    let moveDistance: CGFloat = 10.0
-    let buttonPadding: CGFloat = 160
-    let gradientLayer = CAGradientLayer()
     
-    var circleView: UIView!
+    private let moveDistance: CGFloat = 10.0
+    private let buttonPadding: CGFloat = 160
+    private let gradientLayer = CAGradientLayer()
+    
+    private var circleView: UIView!
+    private var animationManager: AnimationManager!
+    private var gestureManager: GestureManager!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         createCircleView()
-        setupGestureRecognizers()
-        
+        setupAnimationManager()
+        setupGestureManager()
     }
     
     
     @IBAction func MoveUp(_ sender: Any) {
-        moveCircleUp()
+        animationManager.moveCircleUp()
     }
     
-    
     @IBAction func MoveDown(_ sender: Any) {
-        moveCircleDown()
-        
+        animationManager.moveCircleDown()
     }
     
     @IBAction func MoveLeft(_ sender: Any) {
-        moveCircleLeft()
+        animationManager.moveCircleLeft()
     }
     
     @IBAction func MoveRight(_ sender: Any) {
-        moveCircleRight()
+        animationManager.moveCircleRight()
     }
     
+    private func setupAnimationManager() {
+        animationManager = AnimationManager(circleView: circleView, moveDistance: moveDistance, buttonPadding: buttonPadding)
+        
+    }
     
-    func createCircleView() {
+    private func setupGestureManager() {
+        gestureManager = GestureManager(circleView: circleView)
+        gestureManager.delegate = self
+    }
+    
+    private func createCircleView() {
         let circleSize: CGFloat = 150
         let centerX = view.bounds.midX - circleSize / 2
-        let centerY = view.bounds.midY - circleSize / 2
+        let startY = -circleSize
+        let endY = view.bounds.midY - circleSize / 2
         
-        circleView = UIView(frame: CGRect(x: centerX, y: centerY, width: circleSize, height: circleSize))
+        circleView = UIView(frame: CGRect(x: centerX, y: startY, width: circleSize, height: circleSize))
         circleView.backgroundColor = UIColor.green
         circleView.layer.cornerRadius = circleSize / 2
+        circleView.layer.masksToBounds = true
         view.addSubview(circleView)
-    }
-    
-    
-    func setupGestureRecognizers() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(circleTapped))
-        view.addGestureRecognizer(tapGesture)
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
-        circleView.addGestureRecognizer(panGesture)
-    }
-    
-    
-    func springAnimation() {
-        UIView.animate(withDuration: 1.5,
+        UIView.animate(withDuration: 1.0,
                        delay: 0.0,
-                       usingSpringWithDamping: 0.1,
-                       initialSpringVelocity: 0.0,
                        options: [],
                        animations: {
-            self.circleView.center = CGPoint(x: self.view.center.x, y: 300)
-        }, completion: nil)
+            self.circleView.frame = CGRect(x: centerX, y: endY, width: circleSize, height: circleSize)
+            self.circleView.alpha = 1.0
+        },completion: nil)
+        animationWithGradientLayer()
+    }
+    
+    private func animationWithGradientLayer(){
+        gradientLayer.frame = circleView.bounds
+        gradientLayer.colors = [UIColor.red.cgColor, UIColor.blue.cgColor]
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)
+        circleView.layer.addSublayer(gradientLayer)
+    }
+    
+}
+
+extension ViewController: GestureManagerDelegate {
+    func circleTapped() {
+        let circleSize: CGFloat = 150
+        let randomX = CGFloat.random(in: 0...(view.bounds.width - circleSize))
+        let maxY = view.bounds.height - circleSize - buttonPadding
+        var randomY = CGFloat.random(in: 0...maxY)
         
-    }
-    
-    func scaleAnimation() {
-        UIView.animate(withDuration: 2.0) {
-            self.circleView.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        if randomY < buttonPadding {
+            randomY = buttonPadding
+        }
+        
+        UIView.animate(withDuration: 0.3) {
+            self.circleView.frame = CGRect(x: randomX, y: randomY, width: circleSize, height: circleSize)
+            self.circleView.backgroundColor = .random()
+            self.gradientLayer.removeFromSuperlayer()
         }
     }
     
-    
-    func spinAnimation() {
-        UIView.animate(withDuration: 1.0, animations: {
-            self.circleView.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        }, completion: { _ in
-            UIView.animate(withDuration: 1.0, animations: {
-                self.circleView.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
-            })
-        })
-    }
-    
-    func rotateAnimation() {
-        UIView.animate(withDuration: 2.0, animations: {
-            self.circleView.transform = CGAffineTransform(scaleX: 1.5, y: 1.5)
-        }, completion: { _ in
-            UIView.animate(withDuration: 2.0, animations: {
-                self.circleView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-            })
-        })
-    }
-    
-    
-    func colorAnimation() {
-        UIView.animate(withDuration: 2.0) {
-            self.circleView.backgroundColor = UIColor.blue
-        }
-    }
-    
-    
-    
-    @objc func handlePan(_ gesture: UIPanGestureRecognizer) {
+    func handlePan(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
         circleView.center = CGPoint(x: circleView.center.x + translation.x, y: circleView.center.y + translation.y)
         gesture.setTranslation(CGPoint.zero, in: view)
     }
-    
-    
-    @objc func circleTapped() {
-        
-        let circleSize: CGFloat = 150
-        let randomX = CGFloat.random(in: 0...(view.bounds.width - circleSize))
-        let randomY = CGFloat.random(in: 0...(view.bounds.height - circleSize))
-        UIView.animate(withDuration: 0.3) {
-            self.circleView.frame = CGRect(x: randomX, y: randomY, width: circleSize, height: circleSize)
-            self.circleView.backgroundColor = .random()
-        }
-    }
-    
-    @objc func moveCircleUp() {
-        springAnimation()
-        let newPosY = circleView.frame.origin.y - moveDistance
-        if newPosY >= buttonPadding {
-            UIView.animate(withDuration: 0.3) {
-                self.circleView.frame.origin.y = newPosY
-            }
-        }
-    }
-    
-    
-    @objc func moveCircleRight() {
-        scaleAnimation()
-        if circleView.frame.origin.x + circleView.frame.size.width + moveDistance <= view.bounds.width {
-            UIView.animate(withDuration: 0.3) {
-                self.circleView.frame.origin.x += self.moveDistance
-            }
-        }
-        
-    }
-    
-    @objc func moveCircleLeft() {
-        rotateAnimation()
-        if circleView.frame.origin.x - moveDistance >= 0 {
-            UIView.animate(withDuration: 0.3) {
-                self.circleView.frame.origin.x -= self.moveDistance
-            }
-        }
-    }
-    
-    
-    @objc func moveCircleDown() {
-        colorAnimation()
-        if circleView.frame.origin.y + circleView.frame.size.height + moveDistance <= view.bounds.height {
-            UIView.animate(withDuration: 0.3) {
-                self.circleView.frame.origin.y += self.moveDistance
-            }
-        }
-    }
-    
 }
 
 extension UIColor {
