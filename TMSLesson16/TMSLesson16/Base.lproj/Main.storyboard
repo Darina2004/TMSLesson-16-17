@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TMSLesson16" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ktX-kk-7Aw">
+                                <rect key="frame" x="16" y="59" width="361" height="113"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vmS-dd-qMV">
+                                        <rect key="frame" x="0.0" y="0.0" width="180.66666666666666" height="113"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="LEFT">
+                                            <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="MoveLeft:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tDX-DO-A4s"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVr-mM-Mcz">
+                                        <rect key="frame" x="180.66666666666663" y="0.0" width="180.33333333333337" height="113"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="RIGHT">
+                                            <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="MoveRight:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yjU-9b-2df"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="113" id="B6c-73-Rnn"/>
+                                    <constraint firstAttribute="width" constant="361" id="DXm-PD-Mwu"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="61" translatesAutoresizingMaskIntoConstraints="NO" id="zRL-3U-MYi">
+                                <rect key="frame" x="159" y="42" width="75" height="129.66666666666666"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVE-il-4Pf">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="34.333333333333336"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="UP"/>
+                                        <connections>
+                                            <action selector="MoveUp:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3lD-Ih-wfq"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lSH-GP-dnk">
+                                        <rect key="frame" x="0.0" y="95.333333333333343" width="75" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="DOWN">
+                                            <fontDescription key="titleFontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                        </buttonConfiguration>
+                                        <connections>
+                                            <action selector="MoveDown:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9ru-OS-Q7C"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="129.66999999999999" id="BJ9-Xe-ftP"/>
+                                    <constraint firstAttribute="width" constant="75" id="HBr-A8-1Xu"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ktX-kk-7Aw" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="1h7-t5-K0K"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zRL-3U-MYi" secondAttribute="bottom" constant="646.33000000000004" id="5u5-s0-SDw"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ktX-kk-7Aw" secondAttribute="trailing" constant="16" id="B5q-z7-jUY"/>
+                            <constraint firstItem="zRL-3U-MYi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="159" id="MJt-C2-2GM"/>
+                            <constraint firstItem="ktX-kk-7Aw" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OaB-1j-BS3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ktX-kk-7Aw" secondAttribute="bottom" constant="646" id="RIE-Ph-r5c"/>
+                            <constraint firstItem="zRL-3U-MYi" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="70" id="ahG-vh-IhT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zRL-3U-MYi" secondAttribute="trailing" constant="159" id="fhy-x3-Eb6"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonDown" destination="lSH-GP-dnk" id="Fqe-Gc-Nbi"/>
+                        <outlet property="buttonLeft" destination="vmS-dd-qMV" id="qjL-zK-nEd"/>
+                        <outlet property="buttonRight" destination="SVr-mM-Mcz" id="Pe9-Xe-8HQ"/>
+                        <outlet property="buttonUP" destination="SVE-il-4Pf" id="Oys-mu-PXc"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="113.74045801526717" y="-28.169014084507044"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
